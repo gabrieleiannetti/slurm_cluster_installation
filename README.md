@@ -21,6 +21,7 @@ Slurm Worker                 |lxdev02                      |lxdev02.devops.test
 
 Common Installation and Configuration Tasks
 -------------------------------------------
+Describes common installation and configuration tasks that have to be done multiple times.
 
 ### Munge Authentification Service<a name="munge"></a>
 
@@ -81,7 +82,7 @@ FLUSH PRIVILEGES;
 ### Slurm Database Daemon
 
 ##### Installing the Munge Authentification Service
-[Setup the Munge authentification service descripted here](#munge)
+[Setup the Munge authentification service](#munge)
 
 ##### Installing the Slurm Database Daemon
 
@@ -123,7 +124,7 @@ view /var/log/slurm-llnl/slurmdbd.log
 ### Slurm Controller
 
 ##### Installing the Munge Authentification Service
-[Setup the Munge authentification service descripted here](#munge)
+[Setup the Munge authentification service](#munge)
 
 ##### Installing the Slurm Controller
 
@@ -134,7 +135,49 @@ apt-get install slurmctld
 
 Create the Slurm configuration file under: **/etc/slurm-llnl/slurm.conf**
 ```
+# MANAGEMENT POLICIES                                                              
+ControlMachine=lxcm01                                                              
+AuthType=auth/munge                                                                
+CryptoType=crypto/munge                                                            
+SlurmUser=slurm                                                                    
 
+# NODE CONFIGURATIONS                                                              
+NodeName=lxdev0[1-4]                                                               
+
+# PARTITION CONFIGURATIONS                                                         
+MaxMemPerCPU=4096 State=UP
+PartitionName=debug Nodes=lxdev0[1-4] Default=YES                                  
+
+# ACCOUNTING                                                                       
+AccountingStorageType=accounting_storage/slurmdbd                                  
+AccountingStorageHost=lxcc01                                                       
+JobAcctGatherType=jobacct_gather/linux                                             
+ClusterName=snowflake                                                              
+
+# CONNECTION                                                                       
+SlurmctldPort=6817                                                                 
+SlurmdPort=6818                                                                    
+
+# DIRECTORIES                                                                      
+JobCheckpointDir=/var/lib/slurm-llnl/checkpoint                                    
+SlurmdSpoolDir=/var/lib/slurm-llnl/slurmd                                          
+StateSaveLocation=/var/lib/slurm-llnl/slurmctld                                    
+
+# LOGGING                                                                          
+SlurmctldDebug=debug                                                               
+SlurmctldLogFile=/var/log/slurm-llnl/slurmctld.log                                 
+SlurmdDebug=debug                                                                  
+SlurmdLogFile=/var/log/slurm-llnl/slurmd.log                                       
+
+# STATE INFO                                                                       
+SlurmctldPidFile=/var/run/slurm-llnl/slurmctld.pid                                 
+SlurmdPidFile=/var/run/slurm-llnl/slurmd.pid                                       
+
+# SCHEDULING                                                                       
+FastSchedule=2                                                                     
+
+# ERROR RECOVERY                                                                   
+ReturnToService=1                                    
 ```
 
 Set configuration file owner- and group-ship to slurm:
