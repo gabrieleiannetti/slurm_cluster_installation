@@ -115,6 +115,11 @@ Reboot the MySQL database:
 systemctl restart mysql
 ```
 
+Check the log file if the MySQL database started successfully:
+```
+less /var/log/mysql/error.log
+```
+
 ##### Creating a Slurm database user
 
 Create the Slurm database user:
@@ -171,7 +176,7 @@ systemctl start slurmdbd
 
 Check the log file if the Slurm database daemon started successfully and everything rolled up:
 ```
-view /var/log/slurm-llnl/slurmdbd.log
+less /var/log/slurm-llnl/slurmdbd.log
 ```
 
 ### Slurm Controller
@@ -196,7 +201,7 @@ systemctl start slurmctld
 
 Check the log file if the Slurm controller started successfully:
 ```
-view /var/log/slurm-llnl/slurmctld.log
+less /var/log/slurm-llnl/slurmctld.log
 ```
 
 ##### Setting up the logical cluster
@@ -228,5 +233,5 @@ systemctl start slurmd
 
 Check the log file if the Slurm controller started successfully:
 ```
-view /var/log/slurm-llnl/slurmd.log
+less /var/log/slurm-llnl/slurmd.log
 ```
