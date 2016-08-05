@@ -218,3 +218,15 @@ Install the Slurm worker package:
 apt-get install slurmd
 ```
 
+##### Setup the Slurm Controller/Worker configuration file
+[Setup the Slurm configuration file](#slurm_conf)
+
+Start the Slurm controller daemon:
+```
+systemctl start slurmd
+```
+
+Check the log file if the Slurm controller started successfully:
+```
+view /var/log/slurm-llnl/slurmld.log
+```
