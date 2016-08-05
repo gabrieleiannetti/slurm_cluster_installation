@@ -145,7 +145,6 @@ SlurmUser=slurm
 NodeName=lxdev0[1-4]                                                               
 
 # PARTITION CONFIGURATIONS                                                         
-MaxMemPerCPU=4096 State=UP
 PartitionName=debug Nodes=lxdev0[1-4] Default=YES                                  
 
 # ACCOUNTING                                                                       
@@ -182,12 +181,12 @@ ReturnToService=1
 
 Set configuration file owner- and group-ship to slurm:
 ```
-chown slurm:slurm /etc/slurm-llnl/slurmdbd.conf
+chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
-Start the Slurm database daemon:
+Start the Slurm controller daemon:
 ```
-systemctl start slurmdbd
+systemctl start slurmctl
 ```
 
 Check the log file if the Slurm database daemon started successfully and everything rolled up:
