@@ -30,10 +30,63 @@ Install the Munge package:
 apt-get install munge
 ```
 
-Provide a shared key for authentification by Munge under: **/etc/munge/munge.key**  
+Provide a shared key under: **/etc/munge/munge.key**  
 After setting the shared key do a reboot of the Munge service to active the key:
 ```
 systemctl restart munge
+```
+
+### Slurm Controller and Worker Configuration File<a name="slurm_conf"></a>
+
+Create the Slurm Controller/Worker configuration file under: **/etc/slurm-llnl/slurm.conf**
+```
+# MANAGEMENT POLICIES                                                              
+ControlMachine=lxcm01                                                              
+AuthType=auth/munge                                                                
+CryptoType=crypto/munge                                                            
+SlurmUser=slurm                                                                    
+
+# NODE CONFIGURATIONS                                                              
+NodeName=lxdev0[1-4]                                                               
+
+# PARTITION CONFIGURATIONS                                                         
+PartitionName=debug Nodes=lxdev0[1-4] Default=YES                                  
+
+# ACCOUNTING                                                                       
+AccountingStorageType=accounting_storage/slurmdbd                                  
+AccountingStorageHost=lxcc01                                                       
+JobAcctGatherType=jobacct_gather/linux                                             
+ClusterName=snowflake                                                              
+
+# CONNECTION                                                                       
+SlurmctldPort=6817                                                                 
+SlurmdPort=6818                                                                    
+
+# DIRECTORIES                                                                      
+JobCheckpointDir=/var/lib/slurm-llnl/checkpoint                                    
+SlurmdSpoolDir=/var/lib/slurm-llnl/slurmd                                          
+StateSaveLocation=/var/lib/slurm-llnl/slurmctld                                    
+
+# LOGGING                                                                          
+SlurmctldDebug=debug                                                               
+SlurmctldLogFile=/var/log/slurm-llnl/slurmctld.log                                 
+SlurmdDebug=debug                                                                  
+SlurmdLogFile=/var/log/slurm-llnl/slurmd.log                                       
+
+# STATE INFO                                                                       
+SlurmctldPidFile=/var/run/slurm-llnl/slurmctld.pid                                 
+SlurmdPidFile=/var/run/slurm-llnl/slurmd.pid                                       
+
+# SCHEDULING                                                                       
+FastSchedule=2                                                                     
+
+# ERROR RECOVERY                                                                   
+ReturnToService=1                                    
+```
+
+Set configuration file owner- and group-ship to slurm:
+```
+chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
 
@@ -133,65 +186,22 @@ Install the Slurm controller package:
 apt-get install slurmctld
 ```
 
-Create the Slurm configuration file under: **/etc/slurm-llnl/slurm.conf**
-```
-# MANAGEMENT POLICIES                                                              
-ControlMachine=lxcm01                                                              
-AuthType=auth/munge                                                                
-CryptoType=crypto/munge                                                            
-SlurmUser=slurm                                                                    
-
-# NODE CONFIGURATIONS                                                              
-NodeName=lxdev0[1-4]                                                               
-
-# PARTITION CONFIGURATIONS                                                         
-PartitionName=debug Nodes=lxdev0[1-4] Default=YES                                  
-
-# ACCOUNTING                                                                       
-AccountingStorageType=accounting_storage/slurmdbd                                  
-AccountingStorageHost=lxcc01                                                       
-JobAcctGatherType=jobacct_gather/linux                                             
-ClusterName=snowflake                                                              
-
-# CONNECTION                                                                       
-SlurmctldPort=6817                                                                 
-SlurmdPort=6818                                                                    
-
-# DIRECTORIES                                                                      
-JobCheckpointDir=/var/lib/slurm-llnl/checkpoint                                    
-SlurmdSpoolDir=/var/lib/slurm-llnl/slurmd                                          
-StateSaveLocation=/var/lib/slurm-llnl/slurmctld                                    
-
-# LOGGING                                                                          
-SlurmctldDebug=debug                                                               
-SlurmctldLogFile=/var/log/slurm-llnl/slurmctld.log                                 
-SlurmdDebug=debug                                                                  
-SlurmdLogFile=/var/log/slurm-llnl/slurmd.log                                       
-
-# STATE INFO                                                                       
-SlurmctldPidFile=/var/run/slurm-llnl/slurmctld.pid                                 
-SlurmdPidFile=/var/run/slurm-llnl/slurmd.pid                                       
-
-# SCHEDULING                                                                       
-FastSchedule=2                                                                     
-
-# ERROR RECOVERY                                                                   
-ReturnToService=1                                    
-```
-
-Set configuration file owner- and group-ship to slurm:
-```
-chown slurm:slurm /etc/slurm-llnl/slurm.conf
-```
+[Setup the Slurm configuration file](#slurm_conf)
 
 Start the Slurm controller daemon:
 ```
-systemctl start slurmctl
+systemctl start slurmctld
 ```
 
-Check the log file if the Slurm database daemon started successfully and everything rolled up:
+Check the log file if the Slurm controller started successfully:
 ```
-view /var/log/slurm-llnl/slurmdbd.log
+view /var/log/slurm-llnl/slurmctld.log
+```
+
+##### Setting up the logical cluster
+```
+sacctmgr add cluster snowflake -i
+sacctmgr -i add account slurm Cluster=snowflake Description='none' Organization='none'
 ```
 
 
