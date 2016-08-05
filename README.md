@@ -18,6 +18,13 @@ MySQL Database               |lxdb01                       |lxdb01.devops.test
 Slurm Worker                 |lxdev01                      |lxdev01.devops.test
 Slurm Worker                 |lxdev02                      |lxdev02.devops.test
 
+Common Tasks
+------------
+
+### Munge Authentification Service<a name="munge"></a>
+
+
+
 
 Installation and Configuration
 ------------------------------
@@ -64,7 +71,7 @@ FLUSH PRIVILEGES;
 ### Slurm Database Daemon
 
 ##### Installing the Munge Authentification Service
-
+[This is the link text](#munge)
 Install the Munge package:
 ```
 apt-get install munge
@@ -115,7 +122,45 @@ view /var/log/slurm-llnl/slurmdbd.log
 
 ### Slurm Controller
 
+##### Installing the Munge Authentification Service
 
+Install the Munge package:
+```
+apt-get install munge
+```
+
+Provide a shared key for authentification by Munge under: **/etc/munge/munge.key**  
+After setting the shared key do a reboot of the Munge service to active the key:
+```
+systemctl restart munge
+```
+
+##### Installing the Slurm Controller
+
+Install the Slurm controller package:
+```
+apt-get install slurmctld
+```
+
+Create the Slurm configuration file under: **/etc/slurm-llnl/slurm.conf**
+```
+
+```
+
+Set configuration file owner- and group-ship to slurm:
+```
+chown slurm:slurm /etc/slurm-llnl/slurmdbd.conf
+```
+
+Start the Slurm database daemon:
+```
+systemctl start slurmdbd
+```
+
+Check the log file if the Slurm database daemon started successfully and everything rolled up:
+```
+view /var/log/slurm-llnl/slurmdbd.log
+```
 
 
 ### Slurm Worker
