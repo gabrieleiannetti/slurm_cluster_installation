@@ -28,7 +28,7 @@ We will start to setup the MySQL database first and are continuing with the Slur
 
 ##### Installation and Configuration
 
-Install the MySQL server package
+Install the MySQL server package:
 ```
 apt-get install mysql-server
 ```
@@ -39,7 +39,7 @@ Uncomment the following line to allow remote access from a different host rather
 bind-address           = 127.0.0.1
 ```
 
-Reboot the MySQL database
+Reboot the MySQL database:
 ```
 systemctl restart mysql
 ```
@@ -63,8 +63,55 @@ FLUSH PRIVILEGES;
 
 ### Slurm Database Daemon
 
+##### Installing the Munge Authentification Service
 
+Install the Munge package:
+```
+apt-get install munge
+```
 
+Provide a shared key for authentification by Munge under: **/etc/munge/munge.key**  
+After setting the shared key do a reboot of the Munge service to active the key:
+```
+systemctl restart munge
+```
+
+##### Installing the Slurm Database Daemon
+
+Install the Slurm database daemon package:
+```
+apt-get install slurmdbd
+```
+
+Create the Slurm database daemon configuration file under: **/etc/slurm-llnl/slurmdbd.conf**
+```
+AuthType=auth/munge
+AuthInfo=/var/run/munge/munge.socket.2
+DbdHost=lxcc01
+StorageHost=lxdb01
+StorageLoc=slurm_acct_db
+StoragePass=12345678
+StorageType=accounting_storage/mysql
+StorageUser=slurm
+LogFile=/var/log/slurm-llnl/slurmdbd.log
+PidFile=/var/run/slurm-llnl/slurmdbd.pid
+SlurmUser=slurm
+```
+
+Set configuration file owner- and group-ship to slurm:
+```
+chown slurm:slurm /etc/slurm-llnl/slurmdbd.conf
+```
+
+Start the Slurm database daemon:
+```
+systemctl start slurmdbd
+```
+
+Check the log file if the Slurm database daemon started successfully and everything rolled up:
+```
+view /var/log/slurm-llnl/slurmdbd.log
+```
 
 ### Slurm Controller
 
