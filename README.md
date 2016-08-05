@@ -13,6 +13,7 @@ Listing of participating hosts and its function within the cluster.
 Function                     |Host                         |FQDN
 -----------------------------|-----------------------------|-----------------------------
 Slurm Controller             |lxcm01                       |lxcm01.devops.test
+Slurm Backup Controller      |lxcm02                       |lxcm02.devops.test
 Slurm Database Daemon        |lxcc01                       |lxcc01.devops.test
 MySQL Database               |lxdb01                       |lxdb01.devops.test
 Slurm Worker                 |lxdev01                      |lxdev01.devops.test
@@ -210,6 +211,30 @@ sacctmgr add cluster snowflake -i
 sacctmgr -i add account slurm Cluster=snowflake Description='none' Organization='none'
 ```
 
+### Slurm Backup Controller
+
+##### Installing the Munge Authentification Service
+[Setup the Munge authentification service](#munge)
+
+##### Installing the Slurm Controller
+
+Install the Slurm controller package:
+```
+apt-get install slurmctld
+```
+
+##### Setup the Slurm Controller/Worker configuration file
+[Setup the Slurm configuration file](#slurm_conf)
+
+Start the Slurm controller daemon:
+```
+systemctl start slurmctld
+```
+
+Check the log file if the Slurm controller started successfully:
+```
+less /var/log/slurm-llnl/slurmctld.log
+```
 
 ### Slurm Worker
 
