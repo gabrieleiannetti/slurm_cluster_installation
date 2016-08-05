@@ -43,6 +43,7 @@ Create the Slurm Controller/Worker configuration file under: **/etc/slurm-llnl/s
 ```
 # MANAGEMENT POLICIES                                                              
 ControlMachine=lxcm01                                                              
+BackupController=lxcm02
 AuthType=auth/munge                                                                
 CryptoType=crypto/munge                                                            
 SlurmUser=slurm                                                                    
