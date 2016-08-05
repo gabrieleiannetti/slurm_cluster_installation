@@ -31,7 +31,7 @@ Install the MySQL server package
 apt-get install mysql-server
 ```
 
-Edit the MySQL server configuration file under: **/etc/mysql/my.cnf**
+Edit the MySQL server configuration file under: **/etc/mysql/my.cnf**  
 Uncomment the following line to allow remote access from a different host rather then localhost:
 ```
 bind-address           = 127.0.0.1
