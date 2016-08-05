@@ -228,5 +228,5 @@ systemctl start slurmd
 
 Check the log file if the Slurm controller started successfully:
 ```
-view /var/log/slurm-llnl/slurmld.log
+view /var/log/slurm-llnl/slurmd.log
 ```
