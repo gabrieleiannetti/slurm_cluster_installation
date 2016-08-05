@@ -186,6 +186,7 @@ Install the Slurm controller package:
 apt-get install slurmctld
 ```
 
+##### Setup the Slurm Controller/Worker configuration file
 [Setup the Slurm configuration file](#slurm_conf)
 
 Start the Slurm controller daemon:
@@ -206,3 +207,14 @@ sacctmgr -i add account slurm Cluster=snowflake Description='none' Organization=
 
 
 ### Slurm Worker
+
+##### Installing the Munge Authentification Service
+[Setup the Munge authentification service](#munge)
+
+##### Installing the Slurm Worker
+
+Install the Slurm worker package:
+```
+apt-get install slurmd
+```
+
