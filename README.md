@@ -87,12 +87,14 @@ ReturnToService=1
 StateSaveLocation=/usr/local/slurm/checkpoint
 ```
 
-Set configuration file owner- and group-ship for slurm:
+Set configuration file owner- and group-ship for Slurm:
 ```
 chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
-Create the directory path of the above configuration parameter StateSaveLocation and set its owner- and group-ship for slurm:
+### Creation of the StateSaveLocation directory<a name="slurm_conf"></a>
+
+Create the directory path of the configuration file parameter StateSaveLocation and set its owner- and group-ship for Slurm:
 ```
 mkdir /usr/local/slurm
 mkdir /usr/local/slurm/checkpoint
