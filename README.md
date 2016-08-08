@@ -84,13 +84,20 @@ FastSchedule=2
 
 # ERROR RECOVERY                                                                   
 ReturnToService=1                                    
+StateSaveLocation=/usr/local/slurm/checkpoint
 ```
 
-Set configuration file owner- and group-ship to slurm:
+Set configuration file owner- and group-ship for slurm:
 ```
 chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
+Create the directory path of the above configuration parameter StateSaveLocation and set its owner- and group-ship for slurm:
+```
+mkdir /usr/local/slurm
+mkdir /usr/local/slurm/checkpoint
+chown slurm:slurm 
+```
 
 Installation and Configuration
 ------------------------------
