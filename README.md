@@ -92,9 +92,9 @@ Set configuration file owner- and group-ship for Slurm:
 chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
-### Creation of the StateSaveLocation directory<a name="slurm_conf"></a>
+### Creation of the State Save Location directory<a name="slurm_ssloc"></a>
 
-Create the directory path of the configuration file parameter StateSaveLocation and set its owner- and group-ship for Slurm:
+Create the directory path of the configuration parameter StateSaveLocation from the /etc/slurm-llnl/slurm.conf file and set its owner- and group-ship for Slurm:
 ```
 mkdir /usr/local/slurm
 mkdir /usr/local/slurm/checkpoint
@@ -205,6 +205,10 @@ apt-get install slurmctld
 ##### Setup the Slurm Controller/Worker configuration file
 [Setup the Slurm configuration file](#slurm_conf)
 
+##### Create the State Save Location directory
+[Create the State Save Location directory](#slurm_ssloc)
+
+##### Starting the Slurm Primary Controller
 Start the Slurm controller daemon:
 ```
 systemctl start slurmctld
@@ -236,6 +240,10 @@ apt-get install slurmctld
 ##### Setup the Slurm Controller/Worker configuration file
 [Setup the Slurm configuration file](#slurm_conf)
 
+##### Create the State Save Location directory
+[Create the State Save Location directory](#slurm_ssloc)
+
+##### Starting the Slurm Backup Controller
 Start the Slurm controller daemon:
 ```
 systemctl start slurmctld
