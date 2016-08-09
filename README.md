@@ -97,7 +97,7 @@ Both directory paths which are specified by the parameter **JobCheckpointDir** a
 
 ##### Creating the checkpoint directories
 
-Create the checkpoint directories on __both controller__:
+Create the checkpoint directories on _both_ controller:
 ```
 cd /var/lib/slurm-llnl/
 
