@@ -91,7 +91,7 @@ Set configuration file owner- and group-ship for Slurm:
 chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
-### Setting up the checkpoint directories between the Slurm Controller<a name="slurm_ssloc"></a>
+### Setting up the checkpoint directories between the Slurm Controller<a name="setup_checkdirs"></a>
 
 Both directory paths which are specified by the parameter **JobCheckpointDir** and **StateSaveLocation** of the configuration file **/etc/slurm-llnl/slurm.conf** are set up here via a NFS mount, so both the primary and backup controller can share its directory contents.
 
@@ -247,7 +247,7 @@ apt-get install slurmctld
 [Setup the Slurm configuration file](#slurm_conf)
 
 ##### Create the State Save Location directory
-[Create the State Save Location directory](#slurm_ssloc)
+[Create the State Save Location directory](#setup_checkdirs)
 
 ##### Starting the Slurm Primary Controller
 Start the Slurm controller daemon:
@@ -282,7 +282,7 @@ apt-get install slurmctld
 [Setup the Slurm configuration file](#slurm_conf)
 
 ##### Create the State Save Location directory
-[Create the State Save Location directory](#slurm_ssloc)
+[Create the State Save Location directory](#setup_checkdirs)
 
 ##### Starting the Slurm Backup Controller
 Start the Slurm controller daemon:
