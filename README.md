@@ -84,7 +84,6 @@ FastSchedule=2
 
 # ERROR RECOVERY                                                                   
 ReturnToService=1                                    
-StateSaveLocation=/usr/local/slurm/checkpoint
 ```
 
 Set configuration file owner- and group-ship for Slurm:
