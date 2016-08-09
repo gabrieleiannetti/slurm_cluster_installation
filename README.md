@@ -132,7 +132,7 @@ systemctl restart nfs-kernel-server
 
 Install the required package:
 ```
-apt-get install apt-get install nfs-common
+apt-get install nfs-common
 ```
 
 Mount the checkpoint directories:
