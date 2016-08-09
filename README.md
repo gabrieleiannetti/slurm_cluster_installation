@@ -108,10 +108,10 @@ chown slurm:slurm job_checkpoint
 chown slurm:slurm state_checkpoint
 ```
 
-##### Setting up the NFS server
-Set up the NFS server on the primary controller to allow sharing of the directories.
+##### Setting up the primary controller as NFS server
+The primary controller is used as NFS server to share the checkpoint directories with the backup controller.
 
-Install the nfs-kernel-server package:
+Install the required package:
 ```
 apt-get install nfs-kernel-server
 ```
@@ -127,6 +127,20 @@ Restart the NFS server:
 ```
 systemctl restart nfs-kernel-server
 ```
+
+##### Setting up the backup controller
+
+Install the required package:
+```
+apt-get install apt-get install nfs-common
+```
+
+Mount the checkpoint directories:
+```
+sudo mount -t nfs -o rw,nosuid lxcm01.devops.test:/var/lib/slurm-llnl/job_checkpoint /var/lib/slurm-llnl/job_checkpoint
+sudo mount -t nfs -o rw,nosuid lxcm01.devops.test:/var/lib/slurm-llnl/state_checkpoint /var/lib/slurm-llnl/state_checkpoint
+```
+
 
 Installation and Configuration
 ------------------------------
