@@ -65,9 +65,9 @@ SlurmctldPort=6817
 SlurmdPort=6818                                                                    
 
 # DIRECTORIES                                                                      
-JobCheckpointDir=/var/lib/slurm-llnl/checkpoint                                    
+JobCheckpointDir=/var/lib/slurm-llnl/job_checkpoint                                    
 SlurmdSpoolDir=/var/lib/slurm-llnl/slurmd                                          
-StateSaveLocation=/var/lib/slurm-llnl/slurmctld                                    
+StateSaveLocation=/var/lib/slurm-llnl/state_checkpoint                                    
 
 # LOGGING                                                                          
 SlurmctldDebug=debug                                                               
