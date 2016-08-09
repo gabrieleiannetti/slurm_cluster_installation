@@ -91,13 +91,41 @@ Set configuration file owner- and group-ship for Slurm:
 chown slurm:slurm /etc/slurm-llnl/slurm.conf
 ```
 
-### Creation of the State Save Location directory<a name="slurm_ssloc"></a>
+### Setting up the checkpoint directories between the Slurm Controller<a name="slurm_ssloc"></a>
 
-Create the directory path of the configuration parameter StateSaveLocation from the /etc/slurm-llnl/slurm.conf file and set its owner- and group-ship for Slurm:
+Both directory paths which are specified by the parameter **JobCheckpointDir** and **StateSaveLocation** of the configuration file **/etc/slurm-llnl/slurm.conf** are set up here via a NFS mount, so both the primary and backup controller can share its directory contents.
+
+##### Creating the checkpoint directories
+
+Create the checkpoint directories on __both controller__:
 ```
-mkdir /usr/local/slurm
-mkdir /usr/local/slurm/checkpoint
-chown slurm:slurm 
+cd /var/lib/slurm-llnl/
+
+mkdir job_checkpoint
+mkdir state_checkpoint
+
+chown slurm:slurm job_checkpoint
+chown slurm:slurm state_checkpoint
+```
+
+##### Setting up the NFS server
+Set up the NFS server on the primary controller to allow sharing of the directories.
+
+Install the nfs-kernel-server package:
+```
+apt-get install nfs-kernel-server
+```
+
+Edit the proper config file:
+```
+vi /etc/exports
+/var/lib/slurm-llnl/job_checkpoint      lxcm02.devops.test(rw,async)
+/var/lib/slurm-llnl/state_checkpoint    lxcm02.devops.test(rw,async)
+```
+
+Restart the NFS server:
+```
+systemctl restart nfs-kernel-server
 ```
 
 Installation and Configuration
