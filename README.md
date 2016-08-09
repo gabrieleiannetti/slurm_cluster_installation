@@ -93,7 +93,7 @@ chown slurm:slurm /etc/slurm-llnl/slurm.conf
 
 ### Setting up the checkpoint directories between the Slurm Controller<a name="setup_checkdirs"></a>
 
-Both directory paths which are specified by the parameter **JobCheckpointDir** and **StateSaveLocation** of the configuration file **/etc/slurm-llnl/slurm.conf** are set up here via a NFS mount, so both the primary and backup controller can share its directory contents.
+Both directory paths which are specified by the parameter **JobCheckpointDir** and **StateSaveLocation** in the configuration file **/etc/slurm-llnl/slurm.conf** are set up here via a NFS mount, so both the primary and backup controller can share its directory contents.
 
 ##### Creating the checkpoint directories
 
