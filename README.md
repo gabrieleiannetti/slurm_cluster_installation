@@ -246,8 +246,8 @@ apt-get install slurmctld
 ##### Setup the Slurm Controller/Worker configuration file
 [Setup the Slurm configuration file](#slurm_conf)
 
-##### Create the State Save Location directory
-[Create the State Save Location directory](#setup_checkdirs)
+##### Setup the checkpoint directories for the primary controller
+[Setup the checkpoint directories](#setup_checkdirs)
 
 ##### Starting the Slurm Primary Controller
 Start the Slurm controller daemon:
@@ -281,8 +281,8 @@ apt-get install slurmctld
 ##### Setup the Slurm Controller/Worker configuration file
 [Setup the Slurm configuration file](#slurm_conf)
 
-##### Create the State Save Location directory
-[Create the State Save Location directory](#setup_checkdirs)
+##### Setup the checkpoint directories for the backup controller
+[Setup the checkpoint directories](#setup_checkdirs)
 
 ##### Starting the Slurm Backup Controller
 Start the Slurm controller daemon:
