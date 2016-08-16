@@ -119,8 +119,8 @@ apt-get install nfs-kernel-server
 Edit the proper config file:
 ```
 vi /etc/exports
-/var/lib/slurm-llnl/job_checkpoint      lxcm02.devops.test(rw,async)
-/var/lib/slurm-llnl/state_checkpoint    lxcm02.devops.test(rw,async)
+/var/lib/slurm-llnl/job_checkpoint      lxcm02.devops.test(rw,sync)
+/var/lib/slurm-llnl/state_checkpoint    lxcm02.devops.test(rw,sync)
 ```
 
 Restart the NFS server:
