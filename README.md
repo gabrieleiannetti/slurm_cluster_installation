@@ -242,6 +242,7 @@ PartitionName=debug Nodes=lxdev0[1-4] Default=YES
 # ACCOUNTING                                                                       
 AccountingStorageType=accounting_storage/slurmdbd                                  
 AccountingStorageHost=lxcc01                                                       
+AccountingStorageBackupHost=lxcc02
 JobAcctGatherType=jobacct_gather/linux                                             
 ClusterName=snowflake                                                              
 
