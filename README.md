@@ -53,7 +53,7 @@ less /var/log/mysql/error.log
 
 ##### Creating a Slurm Database User
 
-The Slurm database user is allowed to connect from both Slurm database daemons only.
+The Slurm database user is allowed to connect from the Slurm primary and backup database daemon only.
 
 Create the Slurm database user:
 ```
@@ -72,7 +72,7 @@ Finally flush the privileges:
 FLUSH PRIVILEGES;
 ```
 
-### Slurm Database Daemon
+### Setting up a Slurm Database Daemon
 
 ##### Installing the Munge Authentification Service
 [Setup the Munge authentification service](#munge)
